@@ -7,18 +7,35 @@ function! haskell#CabalFileExists() abort
 endfunction
 
 " Given a module name, attempt to find the file it corresponds to
-function! haskell#FindImport(modname) abort
+function! haskell#FindImport(modname, ix)
 
-    let l:fname=substitute(a:modname,'\.','/','g').'.hs'
-    if filereadable(l:fname)
-        return l:fname
-    endif
+    let l:fname=substitute(a:modname,'\.','/','g')
+    let l:dirs=split(&path, ',')
+    let l:suff=split(&suffixesadd, ',')
 
-    " Try to find it relative to the current directory
-    let l:globs=glob('*/' . l:fname, 0, 1)
-    if len(l:globs) > 0
-        return get(l:globs, 0)
-    else
-        return l:fname
-    endif
+    for dir in split(&path, ',')
+        for suffix in split(&suffixesadd, ',')
+
+            let l:matches=globpath(l:dir, l:fname . l:suffix, 0, 1)
+            if len(l:matches) > 0
+                execute 'edit ' . get(l:matches, a:ix)
+                return
+            endif
+
+        endfor
+    endfor
+
+    echoerr 'Unable to find module: ' . a:modname
+
+endfunction
+
+" Setup the include and includeexpr options to parse import declarations
+function! haskell#FollowImports() abort
+
+    setlocal include=\\s*import\\s\\+\\(qualified\\s\\+\\)\\?\\zs[^\ \\t]\\+\\ze
+    nnoremap gf :call haskell#FindImport(expand('<cfile>'), 0)<Cr>
+    setlocal suffixes+=.hi,.o
+    setlocal suffixesadd=.hs,.hsc,.y,.x
+    setlocal path=.,*
+
 endfunction
