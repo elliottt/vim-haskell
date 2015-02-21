@@ -71,7 +71,7 @@ syn match hsModule		"\<module\>"
 syn match hsImport		"\<import\>.*"he=s+6 contains=hsImportMod,hsLineComment,hsBlockComment
 syn match hsImportMod		contained "\<\(as\|qualified\|hiding\)\>"
 syn match hsInfix		"\<\(infix\|infixl\|infixr\)\>"
-syn match hsStructure		"\<\(class\|data\(\s\+\<family\|instance\>\)\?\|deriving\|instance\|default\|where\)\>"
+syn match hsStructure		"\<\(class\|data\(\s\+\<family\|instance\>\)\?\|deriving\|instance\|default\|where\|pattern\)\>"
 syn match hsTypedef		"\<\(type\|newtype\)\>\(\s\+\<\(instance\|family\)\>\)\?"
 syn match hsStatement		"\<\(do\|case\|of\|let\|in\)\>"
 syn match hsConditional		"\<\(if\|then\|else\)\>"
