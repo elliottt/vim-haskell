@@ -99,8 +99,9 @@ endif
 
 
 " Comments
-syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
-syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
+syn keyword hsCommentTodo      TODO FIXME XXX TBD contained
+syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=hsCommentTodo,@Spell
+syn region  hsBlockComment     start="{-"  end="-}" contains=hsCommentTodo,hsBlockComment,@Spell
 syn region  hsPragma	       start="{-#" end="#-}"
 
 " C Preprocessor directives. Shamelessly ripped from c.vim and trimmed
@@ -163,6 +164,7 @@ if version >= 508 || !exists("did_hs_syntax_inits")
   HiLink hsBlockComment		  hsComment
   HiLink hsLineComment			  hsComment
   HiLink hsComment			  Comment
+  HiLink hsCommentTodo			  Todo
   HiLink hsPragma			  SpecialComment
   HiLink hsBoolean			  Boolean
   HiLink hsType			  Type
