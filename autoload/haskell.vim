@@ -34,15 +34,15 @@ function! haskell#FindImport(modname, ix) abort
 
 endfunction
 
-command! -count=0 HaskGf call haskell#FindImport(expand('<cfile>'), "<count>")
-
 " Setup the include and includeexpr options to parse import declarations
 function! haskell#FollowImports() abort
 
     setlocal include=\\s*import\\s\\+\\(qualified\\s\\+\\)\\?\\zs[^\ \\t]\\+\\ze
-    nnoremap <buffer> <silent> gf HaskGf
     setlocal suffixes+=.hi,.o
     setlocal suffixesadd=.hs,.hsc,.y,.x
     setlocal path=.,*
 
 endfunction
+
+command! -count=0 HaskGf call haskell#FindImport(expand('<cfile>'), "<count>")
+nnoremap <silent> <Plug>(haskell-gf) :HaskGf<Return>
