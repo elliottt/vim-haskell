@@ -56,11 +56,7 @@ function! GetHaskellIndent(lnum)
     let l:indent = indent(a:lnum - 1)
 
 
-    " when the line ends in a do, indent by shiftWidth
-    if l:line =~# '^\k\+.*=\s*\%(do\)\?$'
-        let l:indent = match(l:line, '\S') + &shiftwidth
-
-    elseif l:line =~# 'module.*($'
+    if l:line =~# 'module.*(\s*$'
         let l:indent = match(l:line, '\S') + &shiftwidth
 
     " indent to the last open list bracket/open paren/open brace
