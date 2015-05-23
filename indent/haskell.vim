@@ -87,7 +87,7 @@ function! GetHaskellIndent(lnum)
     elseif l:line =~# '\<if\>'
         let l:indent = match(l:line, '\<if\>') + 3
 
-    elseif l:line =~# '\<do$'
+    elseif l:line =~# '\<do\s*$'
         let l:indent = match(l:line, '\S') + &shiftwidth
 
     elseif l:line =~# '->$'
