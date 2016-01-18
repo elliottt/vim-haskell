@@ -6,6 +6,14 @@ function! haskell#CabalFileExists() abort
 
 endfunction
 
+" Returns 1 when a stack.yaml file exists in the current directory, and 0
+" otherwise.
+function! haskell#StackYamlFileExists() abort
+
+    return len(glob('stack.yaml')) > 0
+
+endfunction
+
 " Given a module name, attempt to find the file it corresponds to
 function! haskell#FindImport(modname, ix) abort
 
