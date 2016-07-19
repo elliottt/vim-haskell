@@ -63,11 +63,6 @@ function! GetHaskellIndent(lnum)
     elseif l:line =~# 'deriving.*)$'
         let l:indent = 0
 
-    " If breaking up a type signature for a top-level binding, indent to
-    " the :: so we can easily line up :: and ->
-    elseif l:line =~# '^\S*\s*::'
-        let l:indent = match(l:line, '::')
-
     " indent to the last open list bracket/open paren/open brace
     elseif l:line =~# '\(\[[^\]]*\|([^)]*\|{[^}]*\)$'
         let l:indent = GetBlockMarker(l:line)
