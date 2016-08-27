@@ -10,7 +10,23 @@ endfunction
 " otherwise.
 function! haskell#StackYamlFileExists() abort
 
-    return len(glob('stack.yaml')) > 0
+    return len(findfile('stack.yaml', '.;', -1)) > 0
+
+endfunction
+
+" Returns 1 when a cabal.project or cabal.project.local file is discovered in
+" this directory, or any above.
+function! haskell#CabalProjectFileExists() abort
+
+    if len(findfile('cabal.project', '.;', -1)) > 0
+        return 1
+    endif
+
+    if len(findfile('cabal.project.local', '.;', -1)) > 0
+        return 1
+    endif
+
+    return 0
 
 endfunction
 
