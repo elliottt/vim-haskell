@@ -68,5 +68,15 @@ function! haskell#FollowImports() abort
 
 endfunction
 
+" Setup insert-mode macros for unicode
+function! haskell#UnicodeMacros() abort
+
+    inoremap -> →
+    inoremap <- ←
+    inoremap :: ∷
+    inoremap forall ∀
+
+endfunction
+
 command! -count=0 HaskGf call haskell#FindImport(expand('<cfile>'), "<count>")
 nnoremap <silent> <Plug>(haskell-gf) :HaskGf<Return>
