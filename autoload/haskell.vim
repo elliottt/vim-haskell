@@ -75,6 +75,7 @@ function! haskell#UnicodeMacros() abort
     inoremap <- ←
     inoremap :: ∷
     inoremap forall ∀
+    inoremap => ⇒
 
 endfunction
 
