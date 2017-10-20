@@ -77,6 +77,9 @@ function! haskell#UnicodeMacros() abort
     inoremap forall ∀
     inoremap => ⇒
 
+    digraph fa 8704
+    digraph ZZ 8484
+
 endfunction
 
 command! -count=0 HaskGf call haskell#FindImport(expand('<cfile>'), "<count>")
