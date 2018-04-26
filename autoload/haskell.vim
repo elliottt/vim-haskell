@@ -58,6 +58,14 @@ function! haskell#FindImport(modname, ix) abort
 
 endfunction
 
+" Run fast tags for the given file, updating the nearest tags file found.
+function! haskell#UpdateFastTags(file) abort
+    let l:tagfile=findfile('tags', '.;')
+    if l:tagfile != ""
+        exe "silent !fast-tags -o " . shellescape(l:tagfile) . " ./" . shellescape(a:file)
+    endif
+endfunction
+
 " Setup the include and includeexpr options to parse import declarations
 function! haskell#FollowImports() abort
 
